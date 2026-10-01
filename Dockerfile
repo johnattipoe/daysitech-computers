@@ -3,8 +3,8 @@ FROM php:8.2-apache
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libcurl4-openssl-dev \
-    && docker-php-ext-install -j"$(nproc)" curl \
+    && apt-get install -y --no-install-recommends libcurl4-openssl-dev libzip-dev unzip zlib1g-dev \
+    && docker-php-ext-install -j"$(nproc)" curl zip \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
