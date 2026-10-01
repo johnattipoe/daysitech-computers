@@ -1,0 +1,28 @@
+/* Daysitech Computers — responsive.css
+   Small, targeted overrides layered on top of style.css for breakpoints
+   that don't warrant their own SCSS partial. */
+
+@media (max-width: 992px) {
+  .admin-shell { grid-template-columns: 1fr; }
+  .hero .hero-stats { flex-wrap: wrap; gap: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .hero h1 { max-width: none; }
+  .footer-grid { grid-template-columns: 1fr !important; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .cart-row img { width: 56px; }
+  .dtc-topbar .topbar-links { display: none; }
+}
+
+@media (max-width: 480px) {
+  .container-inner { padding: 0 1rem; }
+  .section { padding: 2.5rem 0; }
+  .stat-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Print styles for invoices/receipts */
+@media print {
+  .dtc-navbar, .dtc-topbar, .dtc-footer, .no-print { display: none !important; }
+  body { background: #fff; }
+}

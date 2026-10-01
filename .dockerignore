@@ -1,0 +1,13 @@
+.git
+.venv
+.env
+.env.*
+vendor/
+composer.phar
+
+**/firebase-service-account*.json*
+**/*firebase-adminsdk*.json*
+storage/logs/
+storage/temp/
+storage/invoices/
+public/uploads/

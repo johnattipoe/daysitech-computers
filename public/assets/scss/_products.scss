@@ -1,0 +1,343 @@
+@use 'variables' as *;
+@use 'sass:color';
+
+// =========================================================
+// HERO
+// =========================================================
+.hero {
+    background: linear-gradient(135deg, $ink-900 0%, $ink-800 60%, #1B3A63 100%);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+    padding: $space-9 0 $space-8;
+
+    &::before {
+        content: '';
+        position: absolute; inset: 0;
+        background-image:
+            linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        mask-image: radial-gradient(ellipse at top right, black, transparent 70%);
+    }
+
+    .hero-inner {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: $space-7;
+        align-items: center;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: $space-2;
+        font-family: $font-mono;
+        font-size: $fs-tiny;
+        color: $circuit-500;
+        background: rgba($circuit-500, 0.12);
+        border: 1px solid rgba($circuit-500, 0.3);
+        padding: $space-1 $space-3;
+        border-radius: 999px;
+        margin-bottom: $space-4;
+    }
+
+    h1 {
+        font-family: $font-display;
+        font-size: $fs-h1;
+        line-height: $lh-tight;
+        margin-bottom: $space-4;
+        max-width: 14ch;
+    }
+
+    p.lead {
+        font-size: 1.1rem;
+        color: rgba(#fff, 0.75);
+        max-width: 46ch;
+        margin-bottom: $space-6;
+    }
+
+    .hero-stats {
+        display: flex;
+        gap: $space-7;
+        margin-top: $space-7;
+        padding-top: $space-6;
+        border-top: 1px solid rgba(#fff, 0.12);
+    }
+    .hero-stat b {
+        display: block;
+        font-family: $font-mono;
+        font-size: 1.6rem;
+        color: $circuit-500;
+    }
+    .hero-stat span { font-size: $fs-small; color: rgba(#fff, .65); }
+
+    .hero-visual {
+        background: rgba(255,255,255,.04);
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: $radius-lg;
+        padding: $space-5;
+        backdrop-filter: blur(6px);
+    }
+
+    @media (max-width: $breakpoint-lg) {
+        .hero-inner { grid-template-columns: 1fr; }
+        .hero-visual { order: -1; }
+    }
+}
+
+.btn-copper {
+    background: $copper-500;
+    border-color: $copper-500;
+    color: #fff;
+    font-weight: 600;
+    &:hover { background: $copper-600; border-color: $copper-600; color: #fff; }
+}
+.btn-outline-light-line {
+    border: 1px solid rgba(#fff, .35);
+    color: #fff;
+    background: transparent;
+    &:hover { border-color: #fff; background: rgba(#fff, .08); color: #fff; }
+}
+.btn-ink {
+    background: $ink-900; border-color: $ink-900; color: #fff;
+    &:hover { background: $ink-800; border-color: $ink-800; color: #fff; }
+}
+
+// =========================================================
+// SECTION HEADERS
+// =========================================================
+.section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: $space-6;
+    gap: $space-4;
+
+    h2 {
+        font-family: $font-display;
+        font-size: $fs-h2;
+        color: $ink-900;
+        margin: 0;
+    }
+    p { color: $text-600; margin: $space-2 0 0; }
+}
+
+// =========================================================
+// PRODUCT CARD
+// =========================================================
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: $space-5;
+}
+
+.product-card {
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color .15s ease, transform .15s ease;
+    position: relative;
+
+    &:hover {
+        border-color: $copper-500;
+        transform: translateY(-3px);
+    }
+
+    .product-thumb {
+        aspect-ratio: 4/3;
+        background: $paper-100;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+    .product-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .product-badges {
+        position: absolute; top: $space-3; left: $space-3;
+        display: flex; flex-direction: column; gap: $space-1;
+    }
+
+    .wishlist-btn {
+        position: absolute; top: $space-3; right: $space-3;
+        width: 32px; height: 32px; border-radius: 50%;
+        background: rgba(255,255,255,.9);
+        display: flex; align-items: center; justify-content: center;
+        border: none; color: $ink-900; cursor: pointer;
+    }
+
+    .product-body {
+        padding: $space-4;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        gap: $space-2;
+    }
+
+    .product-category { font-size: $fs-tiny; color: $text-400; text-transform: uppercase; letter-spacing: .04em; }
+    .product-name {
+        font-weight: 600; color: $ink-900; font-size: $fs-body;
+        display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        min-height: 2.6em;
+    }
+    .product-rating { color: $amber-500; font-size: $fs-small; display: flex; align-items: center; gap: $space-1; }
+    .product-rating span { color: $text-400; }
+
+    .product-price {
+        margin-top: auto;
+        display: flex;
+        align-items: baseline;
+        gap: $space-2;
+        font-family: $font-mono;
+    }
+    .price-now { font-weight: 700; color: $ink-900; font-size: 1.1rem; }
+    .price-was { color: $text-400; text-decoration: line-through; font-size: $fs-small; }
+
+    .product-actions { display: flex; gap: $space-2; margin-top: $space-3; }
+    .product-actions .btn { flex: 1; font-size: $fs-small; }
+}
+
+// =========================================================
+// BADGES / STATUS PILLS
+// =========================================================
+.badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    padding: $space-1 $space-3;
+    border-radius: 999px;
+    font-size: $fs-tiny;
+    font-weight: 600;
+    font-family: $font-mono;
+    text-transform: uppercase;
+    letter-spacing: .02em;
+}
+.badge-success { background: rgba($circuit-500, .12); color: $circuit-600; }
+.badge-warning { background: rgba($amber-500, .15); color: color.adjust($amber-500, $lightness: -18%); }
+.badge-danger  { background: rgba($signal-500, .12); color: $signal-500; }
+.badge-info    { background: rgba($ink-700, .12); color: $ink-800; }
+.badge-neutral { background: $paper-100; color: $text-600; }
+
+// =========================================================
+// CATEGORY TILES
+// =========================================================
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr));
+    gap: $space-4;
+}
+.category-toolbar {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: $space-6;
+    margin-bottom: $space-4;
+
+    h2 { margin: 0 0 $space-2; font-size: 1.5rem; }
+    @media (max-width: $breakpoint-sm) { align-items: stretch; flex-direction: column; gap: $space-4; }
+}
+.category-kicker { margin: 0 0 $space-2; color: $copper-500; font-family: $font-mono; font-size: $fs-tiny; }
+.category-intro { margin: 0; color: $text-600; }
+.category-search {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    width: min(100%, 330px);
+    min-height: 46px;
+    padding: 0 $space-4;
+    border: 1px solid $border-200;
+    background: $paper-0;
+    color: $text-600;
+
+    &:focus-within { border-color: $copper-500; outline: 2px solid rgba($copper-500, .16); }
+    input { width: 100%; min-width: 0; border: 0; outline: 0; background: transparent; color: $ink-900; }
+    @media (max-width: $breakpoint-sm) { width: 100%; }
+}
+.category-result-count { margin: 0 0 $space-3; color: $text-600; font-family: $font-mono; font-size: $fs-tiny; }
+.category-tile {
+    display: flex;
+    align-items: center;
+    gap: $space-4;
+    min-height: 108px;
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: 6px;
+    padding: $space-5 $space-4;
+    text-decoration: none;
+    color: $ink-900;
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+
+    &:hover { transform: translateY(-2px); border-color: $copper-500; box-shadow: $shadow-card; }
+    &:focus-visible { outline: 2px solid $copper-500; outline-offset: 2px; }
+
+    .cat-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 52px;
+        width: 52px; height: 52px;
+        border-radius: 6px;
+        background: $paper-100;
+        color: $copper-500;
+        font-size: 1.4rem;
+    }
+    .cat-name { display: block; font-weight: 600; font-size: $fs-small; }
+}
+.category-tile-copy { display: grid; gap: $space-1; flex: 1; min-width: 0; }
+.category-tile-action { color: $text-600; font-size: $fs-tiny; }
+.category-tile-arrow { color: $copper-500; }
+.category-tile[hidden] { display: none; }
+.category-grid[hidden] { display: none; }
+.category-no-results { padding: $space-8 $space-4; border: 1px dashed $border-200; text-align: center; color: $text-600; }
+.category-no-results > i { color: $copper-500; font-size: 1.4rem; }
+.category-no-results p { margin: $space-3 0; }
+.category-clear-search { padding: $space-2 $space-3; border: 0; background: transparent; color: $ink-800; text-decoration: underline; }
+
+// =========================================================
+// REPAIR PROCESS STEPS (legitimate sequence -> numbered ok)
+// =========================================================
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-5;
+
+    @media (max-width: $breakpoint-md) { grid-template-columns: 1fr 1fr; }
+}
+.process-step {
+    position: relative;
+    padding: $space-5;
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+
+    .step-num {
+        font-family: $font-mono;
+        color: $copper-500;
+        font-size: $fs-small;
+        margin-bottom: $space-2;
+    }
+    h4 { font-family: $font-display; font-size: 1.05rem; color: $ink-900; margin-bottom: $space-2; }
+    p { font-size: $fs-small; color: $text-600; margin: 0; }
+}
+
+// =========================================================
+// TESTIMONIAL / TRUST
+// =========================================================
+.trust-strip {
+    background: $paper-100;
+    border-top: 1px solid $border-200;
+    border-bottom: 1px solid $border-200;
+    padding: $space-5 0;
+}
+.trust-grid {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: $space-4;
+    text-align: center;
+}
+.trust-item { color: $text-600; font-size: $fs-small; display: flex; align-items: center; gap: $space-2; }
+.trust-item i { color: $circuit-500; }

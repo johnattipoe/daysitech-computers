@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:80"
+    env_file:
+      - .env
+    environment:
+      APP_URL: http://localhost:8000
+    volumes:
+      - ./storage/firebase-service-account.json:/var/www/html/storage/firebase-service-account.json:ro
+      - ./storage/logs:/var/www/html/storage/logs
+      - ./storage/temp:/var/www/html/storage/temp
+      - ./storage/invoices:/var/www/html/storage/invoices
+      - ./public/uploads:/var/www/html/public/uploads
+    restart: unless-stopped

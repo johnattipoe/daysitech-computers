@@ -1,0 +1,210 @@
+@use 'variables' as *;
+
+// =========================================================
+// NAVBAR
+// =========================================================
+.dtc-topbar {
+    background: $ink-900;
+    color: rgba(#fff, 0.85);
+    font-size: $fs-tiny;
+
+    .container-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: $space-2 0;
+        flex-wrap: wrap;
+        gap: $space-2;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { color: $circuit-500; }
+
+    .topbar-links { display: flex; gap: $space-5; align-items: center; }
+    .topbar-links i { margin-right: $space-1; color: $circuit-500; }
+}
+
+.dtc-navbar {
+    background: $paper-0;
+    border-bottom: 1px solid $border-200;
+    position: sticky;
+    top: 0;
+    z-index: $z-nav;
+
+    .navbar-inner {
+        display: flex;
+        align-items: center;
+        gap: $space-6;
+        padding: $space-4 0;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: $space-2;
+        text-decoration: none;
+        flex-shrink: 0;
+    }
+
+    .brand-mark {
+        width: 40px; height: 40px;
+        border-radius: $radius-sm;
+        background: $ink-900;
+        display: flex; align-items: center; justify-content: center;
+        color: $circuit-500;
+        font-family: $font-mono;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+
+    .brand-text {
+        font-family: $font-display;
+        font-weight: 600;
+        font-size: 1.25rem;
+        color: $ink-900;
+        line-height: 1.1;
+    }
+    .brand-text small {
+        display: block;
+        font-family: $font-body;
+        font-weight: 400;
+        font-size: $fs-tiny;
+        color: $text-400;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: $space-5;
+        list-style: none;
+        margin: 0; padding: 0;
+        flex: 1;
+    }
+
+    .nav-links a {
+        color: $text-900;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: $fs-body;
+        padding: $space-2 0;
+        border-bottom: 2px solid transparent;
+        transition: color .15s ease, border-color .15s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: $copper-500;
+        border-color: $copper-500;
+    }
+
+    .nav-search {
+        flex: 1;
+        max-width: 360px;
+        position: relative;
+
+        input {
+            width: 100%;
+            padding: $space-2 $space-4 $space-2 $space-5;
+            border-radius: 999px;
+            border: 1px solid $border-200;
+            background: $paper-100;
+            font-size: $fs-small;
+        }
+        input:focus { outline: 2px solid $copper-500; outline-offset: 1px; }
+        button {
+            position: absolute; right: 4px; top: 4px; bottom: 4px;
+            border: none; background: $ink-900; color: #fff;
+            border-radius: 999px; width: 32px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+        }
+    }
+
+    .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: $space-4;
+        flex-shrink: 0;
+
+        a {
+            color: $ink-900;
+            text-decoration: none;
+            position: relative;
+            font-size: 1.15rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px; right: -10px;
+            background: $copper-500;
+            color: #fff;
+            font-size: 0.65rem;
+            font-family: $font-mono;
+            min-width: 18px; height: 18px;
+            border-radius: 999px;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 4px;
+        }
+    }
+
+    .nav-toggle { display: none; background: none; border: none; font-size: 1.4rem; color: $ink-900; }
+
+    @media (max-width: $breakpoint-lg) {
+        .nav-links, .nav-search { display: none; }
+        .nav-toggle { display: block; }
+    }
+}
+
+// Mobile offcanvas menu (Bootstrap offcanvas markup used in navbar.php)
+
+// =========================================================
+// FOOTER
+// =========================================================
+.dtc-footer {
+    background: $ink-900;
+    color: rgba(#fff, 0.72);
+    padding: $space-8 0 $space-5;
+    margin-top: $space-9;
+
+    h5 {
+        font-family: $font-display;
+        color: #fff;
+        font-size: 1rem;
+        margin-bottom: $space-4;
+    }
+
+    a { color: rgba(#fff, 0.72); text-decoration: none; }
+    a:hover { color: $circuit-500; }
+
+    ul { list-style: none; padding: 0; margin: 0; }
+    li { margin-bottom: $space-2; font-size: $fs-small; }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 1.4fr repeat(3, 1fr);
+        gap: $space-6;
+    }
+
+    @media (max-width: $breakpoint-md) {
+        .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(#fff, 0.1);
+        margin-top: $space-7;
+        padding-top: $space-4;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: $space-2;
+        font-size: $fs-tiny;
+        color: rgba(#fff, 0.5);
+    }
+
+    .social-row { display: flex; gap: $space-3; }
+    .social-row a {
+        width: 34px; height: 34px;
+        border: 1px solid rgba(#fff, 0.2);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+    }
+    .social-row a:hover { border-color: $circuit-500; }
+}

@@ -1,0 +1,137 @@
+@use 'variables' as *;
+
+// =========================================================
+// ADMIN SHELL
+// =========================================================
+.admin-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    background: $paper-100;
+}
+
+.admin-sidebar {
+    background: $ink-900;
+    color: rgba(#fff, .75);
+    padding: $space-5 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+
+    .sidebar-brand {
+        display: flex; align-items: center; gap: $space-2;
+        padding: 0 $space-5 $space-5;
+        color: #fff; text-decoration: none;
+        border-bottom: 1px solid rgba(#fff, .1);
+        margin-bottom: $space-4;
+    }
+    .sidebar-brand .brand-mark {
+        width: 36px; height: 36px; border-radius: $radius-sm;
+        background: $circuit-500; color: $ink-900;
+        display: flex; align-items: center; justify-content: center;
+        font-family: $font-mono; font-weight: 700;
+    }
+
+    .nav-section-title {
+        font-size: $fs-tiny; text-transform: uppercase; letter-spacing: .06em;
+        color: rgba(#fff, .35); padding: $space-4 $space-5 $space-2;
+    }
+
+    a.nav-link {
+        display: flex; align-items: center; gap: $space-3;
+        padding: $space-3 $space-5;
+        color: rgba(#fff, .75);
+        text-decoration: none;
+        font-size: $fs-small;
+        border-left: 3px solid transparent;
+    }
+    a.nav-link i { width: 18px; text-align: center; color: rgba(#fff, .5); }
+    a.nav-link:hover { background: rgba(#fff, .04); color: #fff; }
+    a.nav-link.active {
+        background: rgba($circuit-500, .1);
+        color: #fff;
+        border-color: $circuit-500;
+    }
+    a.nav-link.active i { color: $circuit-500; }
+
+    @media (max-width: $breakpoint-lg) { display: none; }
+}
+
+.admin-main { min-width: 0; }
+
+.admin-topbar {
+    background: $paper-0;
+    border-bottom: 1px solid $border-200;
+    padding: $space-4 $space-6;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: $z-nav;
+}
+.admin-topbar h1 { font-family: $font-display; font-size: 1.4rem; color: $ink-900; margin: 0; }
+
+.admin-content { padding: $space-6; }
+
+// ---- Stat cards ----
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: $space-5;
+    margin-bottom: $space-6;
+}
+.stat-card {
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+    padding: $space-5;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.stat-card .stat-icon {
+    width: 44px; height: 44px; border-radius: $radius-sm;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+}
+.stat-card .stat-value { font-family: $font-mono; font-size: 1.6rem; font-weight: 700; color: $ink-900; display: block; }
+.stat-card .stat-label { color: $text-600; font-size: $fs-small; }
+.stat-card .stat-delta { font-size: $fs-tiny; font-weight: 600; margin-top: $space-2; }
+.stat-delta.up { color: $circuit-600; }
+.stat-delta.down { color: $signal-500; }
+
+// ---- Panels / tables ----
+.admin-panel {
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+    margin-bottom: $space-5;
+}
+.admin-panel-head {
+    padding: $space-5;
+    border-bottom: 1px solid $border-200;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.admin-panel-head h3 { font-family: $font-display; font-size: 1.1rem; color: $ink-900; margin: 0; }
+.admin-panel-body { padding: $space-5; }
+
+.table-dtc { width: 100%; border-collapse: collapse; font-size: $fs-small; }
+.table-dtc th {
+    text-align: left; text-transform: uppercase; letter-spacing: .03em;
+    font-size: $fs-tiny; color: $text-400; padding: $space-3 $space-4;
+    border-bottom: 1px solid $border-200;
+}
+.table-dtc td { padding: $space-4; border-bottom: 1px solid $border-200; color: $text-900; vertical-align: middle; }
+.table-dtc tr:last-child td { border-bottom: none; }
+.table-dtc tr:hover td { background: $paper-100; }
+
+.table-thumb { width: 40px; height: 40px; border-radius: $radius-sm; object-fit: cover; background: $paper-100; }
+
+// ---- Empty state ----
+.empty-state {
+    text-align: center;
+    padding: $space-8 $space-4;
+    color: $text-400;
+
+    i { font-size: 2.5rem; margin-bottom: $space-4; color: $border-200; display: block; }
+    h4 { color: $ink-900; font-family: $font-display; margin-bottom: $space-2; }
+    p { max-width: 40ch; margin: 0 auto; }
+}

@@ -1,0 +1,151 @@
+@use 'variables' as *;
+
+// =========================================================
+// FORMS
+// =========================================================
+.form-label { font-weight: 600; font-size: $fs-small; color: $ink-900; margin-bottom: $space-1; }
+
+.form-control, .form-select {
+    border: 1px solid $border-200;
+    border-radius: $radius-sm;
+    padding: $space-3 $space-4;
+    font-size: $fs-body;
+    background: $paper-0;
+    color: $text-900;
+
+    &:focus {
+        border-color: $copper-500;
+        box-shadow: 0 0 0 3px rgba($copper-500, .15);
+    }
+}
+
+.input-group-text { background: $paper-100; border-color: $border-200; }
+
+.btn {
+    border-radius: $radius-sm;
+    padding: $space-3 $space-5;
+    font-weight: 600;
+    font-size: $fs-small;
+}
+.btn-sm { padding: $space-2 $space-3; }
+
+.auth-shell {
+    min-height: calc(100vh - 72px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @media (max-width: $breakpoint-lg) { grid-template-columns: 1fr; }
+}
+.auth-visual {
+    background: $ink-900;
+    color: #fff;
+    padding: $space-8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: $breakpoint-lg) { display: none; }
+
+    h2 { font-family: $font-display; font-size: $fs-h2; max-width: 16ch; }
+    p { color: rgba(#fff, .7); max-width: 34ch; }
+}
+.auth-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $space-7 $space-4;
+}
+.auth-card { width: 100%; max-width: 420px; }
+.auth-card h1 { font-family: $font-display; font-size: $fs-h3; color: $ink-900; margin-bottom: $space-2; }
+.auth-card .subtitle { color: $text-600; margin-bottom: $space-6; font-size: $fs-small; }
+
+// =========================================================
+// ALERTS / FLASH
+// =========================================================
+.dtc-alert {
+    border-radius: $radius-sm;
+    padding: $space-4 $space-5;
+    font-size: $fs-small;
+    display: flex;
+    align-items: flex-start;
+    gap: $space-3;
+    margin-bottom: $space-4;
+    border: 1px solid transparent;
+}
+.dtc-alert-success { background: rgba($circuit-500, .1); border-color: rgba($circuit-500, .3); color: $circuit-600; }
+.dtc-alert-error   { background: rgba($signal-500, .08); border-color: rgba($signal-500, .3); color: $signal-500; }
+
+// =========================================================
+// CART & CHECKOUT
+// =========================================================
+.cart-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto auto auto;
+    gap: $space-4;
+    align-items: center;
+    padding: $space-4 0;
+    border-bottom: 1px solid $border-200;
+
+    img { width: 100%; border-radius: $radius-sm; aspect-ratio: 1; object-fit: cover; background: $paper-100; }
+
+    @media (max-width: $breakpoint-md) {
+        grid-template-columns: 60px 1fr;
+        .qty-cell, .subtotal-cell, .remove-cell { grid-column: 2; }
+    }
+}
+
+.qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid $border-200;
+    border-radius: $radius-sm;
+    overflow: hidden;
+}
+.qty-stepper button { border: none; background: $paper-100; width: 32px; height: 32px; cursor: pointer; }
+.qty-stepper input { width: 44px; border: none; text-align: center; font-family: $font-mono; }
+
+.summary-card {
+    background: $paper-0;
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+    padding: $space-5;
+}
+.summary-line { display: flex; justify-content: space-between; font-size: $fs-small; padding: $space-2 0; color: $text-600; }
+.summary-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1.15rem; color: $ink-900; padding-top: $space-3; border-top: 1px solid $border-200; margin-top: $space-2; }
+
+.payment-option {
+    border: 1px solid $border-200;
+    border-radius: $radius-md;
+    padding: $space-4;
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+    cursor: pointer;
+    margin-bottom: $space-3;
+
+    &:has(input:checked) { border-color: $copper-500; background: rgba($copper-500, .04); }
+    i { font-size: 1.3rem; color: $copper-500; }
+}
+
+// =========================================================
+// TIMELINE (repair tracking / order tracking)
+// =========================================================
+.timeline { position: relative; padding-left: 32px; }
+.timeline::before {
+    content: '';
+    position: absolute; left: 10px; top: 4px; bottom: 4px;
+    width: 2px; background: $border-200;
+}
+.timeline-item { position: relative; padding-bottom: $space-6; }
+.timeline-item::before {
+    content: '';
+    position: absolute; left: -32px; top: 2px;
+    width: 22px; height: 22px; border-radius: 50%;
+    background: $paper-0; border: 2px solid $border-200;
+}
+.timeline-item.is-done::before { background: $circuit-500; border-color: $circuit-500; }
+.timeline-item.is-current::before { background: $copper-500; border-color: $copper-500; box-shadow: 0 0 0 4px rgba($copper-500, .18); }
+.timeline-item h6 { font-weight: 600; color: $ink-900; margin-bottom: $space-1; }
+.timeline-item span { font-size: $fs-tiny; color: $text-400; font-family: $font-mono; }

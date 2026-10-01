@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.venv/
+
+**/firebase-service-account*.json*
+**/*firebase-adminsdk*.json*
+storage/logs/*
+storage/temp/*
+storage/invoices/*
+public/uploads/*
+.env
+vendor/
+node_modules/
