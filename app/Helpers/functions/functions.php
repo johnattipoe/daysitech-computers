@@ -73,7 +73,7 @@ if (!function_exists('config')) {
 if (!function_exists('asset')) {
     function asset(string $path): string
     {
-        return config('app.url') . '/assets/' . ltrim($path, '/');
+        return '/assets/' . ltrim($path, '/');
     }
 }
 
