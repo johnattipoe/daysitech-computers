@@ -1,4 +1,13 @@
 <?php
+use App\Models\Order;
+use App\Models\Repair;
+use App\Models\User;
+
+$orders = Order::recent(200);
+$repairs = Repair::active(200);
+$customers = User::customers(500);
+$revenue = Order::totalRevenue($orders);
+
 $title = 'Dashboard';
 ob_start();
 ?>
@@ -6,24 +15,24 @@ ob_start();
     <div class="col-md-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body">
-                <div class="text-muted small text-uppercase">Orders</div>
-                <h3 class="mt-2 mb-0">0</h3>
+                <div class="text-muted small text-uppercase">Recent Orders</div>
+                <h3 class="mt-2 mb-0"><?= count($orders) ?></h3>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body">
-                <div class="text-muted small text-uppercase">Revenue</div>
-                <h3 class="mt-2 mb-0">GHS 0.00</h3>
+                <div class="text-muted small text-uppercase">Recent Paid Revenue</div>
+                <h3 class="mt-2 mb-0"><?= e(config('app.currency')) ?> <?= number_format($revenue, 2) ?></h3>
             </div>
         </div>
     </div>
     <div class="col-md-3">
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body">
-                <div class="text-muted small text-uppercase">Repairs</div>
-                <h3 class="mt-2 mb-0">0</h3>
+                <div class="text-muted small text-uppercase">Active Repairs</div>
+                <h3 class="mt-2 mb-0"><?= count($repairs) ?></h3>
             </div>
         </div>
     </div>
@@ -31,7 +40,7 @@ ob_start();
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body">
                 <div class="text-muted small text-uppercase">Customers</div>
-                <h3 class="mt-2 mb-0">0</h3>
+                <h3 class="mt-2 mb-0"><?= count($customers) ?></h3>
             </div>
         </div>
     </div>
