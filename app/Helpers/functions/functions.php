@@ -87,7 +87,7 @@ if (!function_exists('url')) {
 if (!function_exists('redirect')) {
     function redirect(string $path): void
     {
-        header('Location: ' . (str_starts_with($path, 'http') ? $path : url($path)));
+        header('Location: ' . (str_starts_with($path, 'http') ? $path : '/' . ltrim($path, '/')));
         exit;
     }
 }
