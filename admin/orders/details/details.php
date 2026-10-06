@@ -23,6 +23,7 @@ ob_start();
 ?>
 
 <a href="/admin/orders" class="small text-muted-dtc mb-3 d-inline-block"><i class="fa-solid fa-arrow-left me-1"></i>Back to Orders</a>
+<button type="button" class="admin-copy-button" data-copy-value="<?= e($order['order_number']) ?>"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy order number</button>
 
 <div class="row g-4">
     <div class="col-lg-8">
@@ -67,7 +68,7 @@ ob_start();
 
         <div class="admin-panel"><div class="admin-panel-body">
             <h6 class="mb-3">Order Status</h6>
-            <form action="/admin/orders/<?= e($id) ?>" method="POST">
+            <form action="/admin/orders/<?= e($id) ?>" method="POST" data-unsaved-warning>
                 <?= csrf_field() ?>
                 <select name="status" class="form-select mb-3">
                     <?php foreach (ORDER_STATUSES as $s): ?>

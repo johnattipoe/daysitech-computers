@@ -1,5 +1,5 @@
 <?php $path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH); ?>
-<div class="summary-card">
+<div class="summary-card account-sidebar-card">
     <div class="text-center mb-3">
         <i class="fa-solid fa-circle-user" style="font-size:3rem;color:#0B1F3A;"></i>
         <h6 class="mt-2 mb-0"><?= e(current_user()['name']) ?></h6>

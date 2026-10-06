@@ -1,3 +1,7 @@
+<?php
+$aboutStats = $aboutStats ?? [];
+$aboutCount = static fn(int $count): string => $count >= 500 ? '500+' : (string) $count;
+?>
 <div class="page-header">
     <div class="container-inner">
         <h1>About Daysitech Computers</h1>
@@ -19,7 +23,7 @@
                         <div class="trust-item"><i class="fa-solid fa-award"></i> Certified technicians</div>
                         <div class="trust-item"><i class="fa-solid fa-box-open"></i> Genuine parts, sourced directly</div>
                         <div class="trust-item"><i class="fa-solid fa-clock"></i> Most repairs in 24–72 hours</div>
-                        <div class="trust-item"><i class="fa-solid fa-users"></i> 4,000+ happy customers</div>
+                        <div class="trust-item"><i class="fa-solid fa-users"></i> Serving customers across Accra</div>
                     </div>
                 </div>
             </div>
@@ -82,20 +86,19 @@
             </div>
         </div>
 
-        <div class="section-head mt-5"><h2>Daysitech By The Numbers</h2><p>Experience that helps us make better recommendations.</p></div>
+        <div class="section-head mt-5"><h2>Live store activity</h2><p>Current figures from the catalog, repair records, and approved customer reviews.</p></div>
         <div class="row g-4 text-center">
-            <div class="col-6 col-lg-3">
-                <div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;">4,000+</strong><p class="text-muted-dtc mb-0">Devices repaired</p></div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;">2,500+</strong><p class="text-muted-dtc mb-0">Products supplied</p></div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;">24–72h</strong><p class="text-muted-dtc mb-0">Typical repair turnaround</p></div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;">4.8/5</strong><p class="text-muted-dtc mb-0">Average customer rating</p></div>
-            </div>
+            <div class="col-6 col-lg-3"><div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;"><?= $aboutCount((int) ($aboutStats['products'] ?? 0)) ?></strong><p class="text-muted-dtc mb-0">Active products listed</p></div></div>
+            <div class="col-6 col-lg-3"><div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;"><?= $aboutCount((int) ($aboutStats['repairs'] ?? 0)) ?></strong><p class="text-muted-dtc mb-0">Repair tickets recorded</p></div></div>
+            <div class="col-6 col-lg-3"><div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;"><?= $aboutCount((int) ($aboutStats['reviews'] ?? 0)) ?></strong><p class="text-muted-dtc mb-0">Approved customer reviews</p></div></div>
+            <div class="col-6 col-lg-3"><div class="summary-card h-100"><strong style="font-size:2rem;color:#C9793D;"><?= !empty($aboutStats['reviews']) ? number_format((float) ($aboutStats['rating'] ?? 0), 1) . '/5' : '�' ?></strong><p class="text-muted-dtc mb-0">Average approved review rating</p></div></div>
+        </div>
+
+        <div class="section-head mt-5"><h2>Stay updated after you book</h2><p>Your customer account keeps purchases and repair work easy to follow.</p></div>
+        <div class="row g-4">
+            <div class="col-md-4"><div class="summary-card h-100"><i class="fa-solid fa-box-open fa-2x mb-3" style="color:#C9793D;"></i><h3 class="h5">Follow orders</h3><p class="text-muted-dtc">Review order status, items, and totals from your customer dashboard.</p><a href="/account/orders" class="btn btn-sm btn-outline-secondary">My orders</a></div></div>
+            <div class="col-md-4"><div class="summary-card h-100"><i class="fa-solid fa-screwdriver-wrench fa-2x mb-3" style="color:#C9793D;"></i><h3 class="h5">Track repair tickets</h3><p class="text-muted-dtc">Use your ticket number to check the latest repair status and technician update.</p><a href="/repairs/track" class="btn btn-sm btn-outline-secondary">Track a repair</a></div></div>
+            <div class="col-md-4"><div class="summary-card h-100"><i class="fa-solid fa-bell fa-2x mb-3" style="color:#C9793D;"></i><h3 class="h5">See account updates</h3><p class="text-muted-dtc">Order and repair updates appear on your dashboard when you sign in.</p><a href="/account/dashboard" class="btn btn-sm btn-outline-secondary">Customer dashboard</a></div></div>
         </div>
 
         <div class="section-head mt-5"><h2>Common Questions</h2><p>A few useful answers before you visit or book.</p></div>
@@ -129,5 +132,3 @@
         </div>
     </div>
 </section>
-
-

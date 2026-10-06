@@ -3,6 +3,8 @@
 /** @var array<int, array<string, mixed>> $repairs */
 $orders = $orders ?? [];
 $repairs = $repairs ?? [];
+$orderCount = (int) ($orderCount ?? count($orders));
+$activeRepairCount = (int) ($activeRepairCount ?? count(array_filter($repairs, fn($repair) => !in_array($repair['status'] ?? '', [REPAIR_STATUS_COMPLETED, REPAIR_STATUS_CANCELLED], true))));
 ?>
 
 <div class="dtc-breadcrumb">
@@ -14,22 +16,36 @@ $repairs = $repairs ?? [];
         <div class="row g-4">
             <div class="col-lg-3"><?php require base_path('views/account/_sidebar.php'); ?></div>
             <div class="col-lg-9">
-                <h1 class="mb-4" style="font-size:1.5rem;">Welcome back, <?= e(explode(' ', current_user()['name'])[0]) ?> 👋</h1>
 
-                <div class="stat-grid">
+                <div class="account-welcome">
+                    <div>
+                        <span class="account-eyebrow">CUSTOMER ACCOUNT</span>
+                        <h1>Welcome back, <?= e(explode(' ', current_user()['name'])[0]) ?></h1>
+                        <p>Review your purchases, follow repairs, and get help with your devices.</p>
+                    </div>
+                    <a href="/products" class="btn btn-copper"><i class="fa-solid fa-cart-shopping me-2"></i>Continue shopping</a>
+                </div>
+
+                <div class="account-quick-actions">
+                    <a href="/repairs/book" class="account-quick-action"><i class="fa-solid fa-screwdriver-wrench"></i>Book a repair</a>
+                    <a href="/account/orders" class="account-quick-action"><i class="fa-solid fa-box"></i>View orders</a>
+                    <a href="/account/profile" class="account-quick-action"><i class="fa-solid fa-user-pen"></i>Update profile</a>
+                </div>
+
+                <div class="account-stat-grid">
                     <div class="stat-card">
-                        <div><span class="stat-value"><?= count($orders) ?></span><span class="stat-label">Recent Orders</span></div>
+                        <div><span class="stat-value"><?= $orderCount ?></span><span class="stat-label">Total Orders</span></div>
                         <div class="stat-icon" style="background:rgba(47,190,133,.12);color:#2FBE85;"><i class="fa-solid fa-box"></i></div>
                     </div>
                     <div class="stat-card">
-                        <div><span class="stat-value"><?= count($repairs) ?></span><span class="stat-label">Active Repairs</span></div>
+                        <div><span class="stat-value"><?= $activeRepairCount ?></span><span class="stat-label">Active Repairs</span></div>
                         <div class="stat-icon" style="background:rgba(201,121,61,.12);color:#C9793D;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                     </div>
                 </div>
 
                 <div class="admin-panel">
                     <div class="admin-panel-head"><h3>Recent Orders</h3><a href="/account/orders" class="small">View all</a></div>
-                    <div class="admin-panel-body">
+                    <div class="admin-panel-body account-table-wrap">
                         <?php if (empty($orders)): ?>
                             <p class="text-muted-dtc mb-0">No orders yet. <a href="/products">Start shopping →</a></p>
                         <?php else: ?>
@@ -50,7 +66,7 @@ $repairs = $repairs ?? [];
 
                 <div class="admin-panel">
                     <div class="admin-panel-head"><h3>Recent Repairs</h3><a href="/account/repairs" class="small">View all</a></div>
-                    <div class="admin-panel-body">
+                    <div class="admin-panel-body account-table-wrap">
                         <?php if (empty($repairs)): ?>
                             <p class="text-muted-dtc mb-0">No repairs booked yet. <a href="/repairs/book">Book one →</a></p>
                         <?php else: ?>
@@ -64,6 +80,29 @@ $repairs = $repairs ?? [];
                                     </tr>
                                 <?php endforeach; ?>
                             </table>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="admin-panel account-updates-panel">
+                    <div class="admin-panel-head"><h3>Account updates</h3><span class="small text-muted-dtc">Order and repair notifications</span></div>
+                    <div class="admin-panel-body">
+                        <?php if (empty($notifications)): ?>
+                            <p class="text-muted-dtc mb-0">You’re all caught up. Updates about your orders and repairs will appear here.</p>
+                        <?php else: ?>
+                            <ul class="account-update-list">
+                                <?php foreach ($notifications as $notice): ?>
+                                    <li class="<?= empty($notice['is_read']) ? 'is-unread' : '' ?>">
+                                        <span class="account-update-icon"><i class="fa-solid <?= ($notice['type'] ?? '') === NOTIFY_REPAIR ? 'fa-screwdriver-wrench' : 'fa-box' ?>" aria-hidden="true"></i></span>
+                                        <div class="account-update-copy">
+                                            <strong><?= e($notice['title'] ?? 'Account update') ?></strong>
+                                            <p><?= e($notice['message'] ?? '') ?></p>
+                                            <time><?= !empty($notice['created_at']) ? format_date($notice['created_at']) : '' ?></time>
+                                        </div>
+                                        <?php if (!empty($notice['link'])): ?><a href="<?= e($notice['link']) ?>" class="btn btn-sm btn-outline-secondary">View</a><?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
                         <?php endif; ?>
                     </div>
                 </div>

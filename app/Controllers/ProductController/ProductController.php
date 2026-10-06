@@ -63,8 +63,9 @@ class ProductController
 
     public function compare(): void
     {
-        $ids = array_filter(explode(',', $_GET['ids'] ?? ''));
-        $products = array_filter(array_map(fn($id) => Product::find($id), $ids));
+        $ids = array_slice(array_values(array_unique(array_filter(array_map('trim', explode(',', $_GET['ids'] ?? ''))))), 0, 3);
+        $products = array_values(array_filter(array_map(fn($id) => Product::find($id), $ids), fn($product) => $product && !empty($product['is_active'])));
+        if (count($products) < 2) $products = [];
 
         view('products.compare', [
             'title'    => 'Compare Products',

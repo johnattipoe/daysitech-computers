@@ -16,13 +16,13 @@ class AuthController
     public function showLogin(): void
     {
         if (is_logged_in()) redirect(config('auth.guest_only_routes_redirect'));
-        view('auth.login', ['title' => 'Sign In', 'pageScript' => 'auth.js']);
+        view('auth.login', ['title' => 'Sign In', 'pageScript' => 'auth.js'], 'auth');
     }
 
     public function showAdminLogin(): void
     {
         if (is_admin()) redirect('/admin/dashboard');
-        view('auth.login', ['title' => 'Admin Sign In', 'adminLogin' => true, 'pageScript' => 'auth.js']);
+        view('auth.login', ['title' => 'Admin Sign In', 'adminLogin' => true, 'pageScript' => 'auth.js'], 'auth');
     }
 
     public function login(): void
@@ -75,13 +75,13 @@ class AuthController
         }
 
         flash('success', 'Welcome to the admin panel, ' . $result['user']['name'] . '!');
-        redirect('/admin/dashboard');
+        redirect('/admin/dashboard?admin_login=success');
     }
 
     public function showRegister(): void
     {
         if (is_logged_in()) redirect(config('auth.guest_only_routes_redirect'));
-        view('auth.register', ['title' => 'Create Account', 'pageScript' => 'auth.js']);
+        view('auth.register', ['title' => 'Create Account', 'pageScript' => 'auth.js'], 'auth');
     }
 
     public function register(): void
@@ -123,12 +123,12 @@ class AuthController
     {
         $this->auth->logout();
         flash('success', 'You have been signed out.');
-        redirect('/login');
+        redirect('/');
     }
 
     public function showForgotPassword(): void
     {
-        view('auth.forgot-password', ['title' => 'Forgot Password']);
+        view('auth.forgot-password', ['title' => 'Forgot Password'], 'auth');
     }
 
     public function forgotPassword(): void

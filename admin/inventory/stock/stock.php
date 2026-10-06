@@ -25,7 +25,7 @@ ob_start();
 
 <div class="row justify-content-center">
     <div class="col-lg-6">
-        <form action="/admin/inventory/stock" method="POST" class="admin-panel">
+        <form action="/admin/inventory/stock" method="POST" class="admin-panel" data-stock-preview data-unsaved-warning>
             <div class="admin-panel-body">
                 <h6 class="mb-3">Update Stock</h6>
                 <div class="mb-3">
@@ -33,20 +33,20 @@ ob_start();
                     <select name="product_id" class="form-select" required>
                         <option value="">Select a product</option>
                         <?php foreach ($products as $p): ?>
-                            <option value="<?= e($p['id']) ?>" <?= $preselect === $p['id'] ? 'selected' : '' ?>><?= e($p['name']) ?> (current: <?= (int) $p['stock'] ?>)</option>
+                            <option value="<?= e($p['id']) ?>" data-stock="<?= (int) ($p['stock'] ?? 0) ?>" <?= $preselect === $p['id'] ? 'selected' : '' ?>><?= e($p['name']) ?> (current: <?= (int) $p['stock'] ?>)</option>
                         <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Action</label>
-                    <select name="mode" class="form-select">
+                    <select name="mode" class="form-select" data-stock-mode>
                         <option value="add">Add to current stock</option>
                         <option value="set">Set exact quantity</option>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Quantity</label>
-                    <input type="number" name="quantity" class="form-control" required>
+                    <input type="number" name="quantity" class="form-control" min="1" step="1" inputmode="numeric" data-stock-quantity required>
                 </div>
                 <div class="mb-4">
                     <label class="form-label">Reason (optional)</label>

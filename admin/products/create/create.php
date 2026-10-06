@@ -58,7 +58,7 @@ $title = 'Add Product';
 ob_start();
 ?>
 
-<form action="/admin/products/create" method="POST">
+<form action="/admin/products/create" method="POST" data-product-editor data-unsaved-warning>
     <?= csrf_field() ?>
     <div class="row g-4">
         <div class="col-lg-8">
@@ -92,7 +92,7 @@ ob_start();
 
             <div class="admin-panel"><div class="admin-panel-body">
                 <h6 class="mb-3">Specifications</h6>
-                <div id="specRows">
+                <div id="specRows" data-spec-rows>
                     <?php for ($i = 0; $i < 4; $i++): ?>
                         <div class="row g-2 mb-2">
                             <div class="col-5"><input type="text" name="spec_key[]" class="form-control form-control-sm" placeholder="e.g. Processor"></div>

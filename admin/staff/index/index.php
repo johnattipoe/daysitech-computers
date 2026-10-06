@@ -82,12 +82,12 @@ ob_start();
             <?php if (user_role() !== 'admin'): ?>
                 <p class="text-muted-dtc small">Only administrators can add staff accounts.</p>
             <?php else: ?>
-                <form action="/admin/staff" method="POST">
+                <form action="/admin/staff" method="POST" data-unsaved-warning>
                     <?= csrf_field() ?>
                     <div class="mb-3"><label class="form-label">Full Name</label><input type="text" name="name" class="form-control" required></div>
                     <div class="mb-3"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required></div>
                     <div class="mb-3"><label class="form-label">Phone</label><input type="text" name="phone" class="form-control"></div>
-                    <div class="mb-3"><label class="form-label">Temporary Password</label><input type="password" name="password" class="form-control" minlength="8" required></div>
+                    <div class="mb-3"><label class="form-label">Temporary Password</label><div class="admin-password-field"><input type="password" name="password" class="form-control" minlength="8" data-admin-password required><button type="button" class="admin-password-toggle" data-password-toggle aria-label="Show password"><i class="fa-solid fa-eye" aria-hidden="true"></i></button></div></div>
                     <div class="mb-4">
                         <label class="form-label">Role</label>
                         <select name="role" class="form-select">

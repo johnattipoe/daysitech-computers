@@ -1,0 +1,34 @@
+.account-welcome {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    margin-bottom: 1.15rem;
+    padding: clamp(1.25rem, 3vw, 1.8rem);
+    border: 1px solid #dfe6ef;
+    border-radius: 15px;
+    background: linear-gradient(115deg, #0b1f3a, #17395f 72%, #225478);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(11, 31, 58, .12);
+}
+.account-welcome h1 { margin: .35rem 0; color: #fff; font: 700 clamp(1.35rem, 1rem + .8vw, 1.8rem)/1.2 'Space Grotesk', sans-serif; }
+.account-welcome p { margin: 0; color: rgba(255,255,255,.72); }
+.account-welcome .btn { flex: 0 0 auto; }
+.account-eyebrow { color: #f0a36d; font: 600 .66rem/1.2 'JetBrains Mono', monospace; letter-spacing: .12em; }
+.account-quick-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
+.account-quick-action { display: inline-flex; align-items: center; gap: .55rem; min-height: 40px; padding: .55rem .85rem; border: 1px solid #dfe6ef; border-radius: 9px; background: #fff; color: #10233d; font-size: .84rem; font-weight: 600; text-decoration: none; }
+.account-quick-action:hover { border-color: #c9793d; color: #b7652e; }
+.account-stat-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin-bottom: 1.2rem; }
+.account-stat-grid .stat-card { min-width: 0; }
+.account-sidebar-card { position: sticky; top: 96px; }
+.account-sidebar-card .btn { min-height: 40px; border-radius: 8px; color: #33445a; }
+.account-sidebar-card .btn:hover { background: #f3f6fa; }
+.account-sidebar-card .btn.btn-ink { color: #fff; }
+.account-table-wrap { overflow-x: auto; }
+.account-table-wrap .table-dtc { min-width: 540px; }
+@media (max-width: 767.98px) {
+    .account-welcome { align-items: flex-start; flex-direction: column; }
+    .account-welcome .btn { width: 100%; }
+    .account-stat-grid { gap: .6rem; }
+    .account-sidebar-card { position: static; }
+}

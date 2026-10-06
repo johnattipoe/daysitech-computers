@@ -5,6 +5,7 @@
     <title>Access Denied — Daysitech Computers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link href="<?= asset('css/fonts.css') ?>" rel="stylesheet">
     <link href="<?= function_exists('asset') ? asset('css/style.css') : '/assets/css/style.css' ?>" rel="stylesheet">
 </head>
 <body style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0B1F3A;font-family:'Inter',sans-serif;">

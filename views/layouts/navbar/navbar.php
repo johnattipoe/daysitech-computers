@@ -50,6 +50,7 @@
                         <li><a class="dropdown-item" href="/account/dashboard"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a></li>
                         <li><a class="dropdown-item" href="/account/orders"><i class="fa-solid fa-box me-2"></i>My Orders</a></li>
                         <li><a class="dropdown-item" href="/account/repairs"><i class="fa-solid fa-screwdriver-wrench me-2"></i>My Repairs</a></li>
+                        <li><a class="dropdown-item" href="/account/wishlist"><i class="fa-solid fa-heart me-2"></i>Wishlist</a></li>
                         <li><a class="dropdown-item" href="/account/profile"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
                         <?php if (is_admin()): ?>
                             <li><a class="dropdown-item" href="/admin/dashboard"><i class="fa-solid fa-shield-halved me-2"></i>Admin Panel</a></li>

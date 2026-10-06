@@ -8,10 +8,12 @@
             <div class="col-lg-3"><?php require base_path('views/account/_sidebar.php'); ?></div>
             <div class="col-lg-9">
                 <h1 class="mb-4" style="font-size:1.5rem;">My Wishlist</h1>
-                <div class="empty-state">
+                <p class="text-muted-dtc small mb-3">Wishlist items are saved in this browser.</p>
+                <div class="product-grid" data-wishlist-grid aria-live="polite"></div>
+                <div class="empty-state" data-wishlist-empty>
                     <i class="fa-regular fa-heart"></i>
                     <h4>Your wishlist is empty</h4>
-                    <p>Tap the heart icon on any product to save it here for later.</p>
+                    <p>Save products with the heart button while browsing the shop. They will appear here on this browser.</p>
                     <a href="/products" class="btn btn-copper mt-3">Browse Products</a>
                 </div>
             </div>

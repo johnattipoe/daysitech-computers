@@ -7,18 +7,22 @@
     </div>
     <div class="auth-form-side">
         <div class="auth-card">
+            <div class="auth-kicker">
+                <span class="auth-kicker-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span>
+                <span><?= $adminLogin ? 'STAFF ACCESS' : 'CUSTOMER ACCESS' ?></span>
+            </div>
             <h1><?= $adminLogin ? 'Admin Sign In' : 'Sign In' ?></h1>
             <p class="subtitle"><?= $adminLogin ? 'Enter your staff credentials to continue.' : 'Enter your details to access your account.' ?></p>
 
-            <form action="<?= $adminLogin ? '/admin/login' : '/login' ?>" method="POST" <?= $adminLogin ? 'target="_blank"' : '' ?>>
+            <form action="<?= $adminLogin ? '/admin/login' : '/login' ?>" method="POST" class="auth-form" <?= $adminLogin ? 'target="_blank" rel="opener" data-admin-login' : '' ?>>
                 <?= csrf_field() ?>
                 <div class="mb-3">
-                    <label class="form-label">Email Address</label>
-                    <input type="email" name="email" class="form-control" required autofocus>
+                    <label class="form-label" for="login-email">Email Address</label>
+                    <input id="login-email" type="email" name="email" class="form-control" autocomplete="email" required autofocus>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" required>
+                    <label class="form-label" for="login-password">Password</label>
+                    <input id="login-password" type="password" name="password" class="form-control" autocomplete="current-password" required>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div class="form-check">
@@ -31,9 +35,9 @@
             </form>
 
             <?php if ($adminLogin): ?>
-                <p class="text-center text-muted-dtc small mt-4"><a href="/login">Customer sign in</a></p>
+                <p class="auth-card-footer text-center text-muted-dtc small"><a href="/login">Customer sign in</a></p>
             <?php else: ?>
-                <p class="text-center text-muted-dtc small mt-4">Don't have an account? <a href="/register">Create one</a></p>
+                <p class="auth-card-footer text-center text-muted-dtc small">Don't have an account? <a href="/register">Create one</a></p>
             <?php endif; ?>
         </div>
     </div>

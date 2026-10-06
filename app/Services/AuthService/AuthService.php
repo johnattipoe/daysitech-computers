@@ -88,32 +88,6 @@ class AuthService
         }
 
         $profile = User::findByEmail($email);
-        if (!$profile && !$allowedRoles) {
-            $uid = $authResult['localId'] ?? '';
-            if (is_string($uid) && $uid !== '') {
-                $profile = User::find($uid);
-                if (!$profile) {
-                    $name = trim((string) ($authResult['displayName'] ?? ''));
-                    if ($name === '') {
-                        $name = strstr($email, '@', true) ?: $email;
-                    }
-
-                    $profile = User::create([
-                        'uid'    => $uid,
-                        'name'   => $name,
-                        'email'  => $email,
-                        'phone'  => '',
-                        'role'   => 'customer',
-                        'status' => 'active',
-                    ], $uid);
-
-                    if (empty($profile['id'])) {
-                        $profile = User::find($uid);
-                    }
-                }
-            }
-        }
-
         if (!$profile) {
             return ['success' => false, 'message' => 'Account profile not found. Please contact support.'];
         }

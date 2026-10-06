@@ -6,12 +6,13 @@
     <title><?= isset($title) ? e($title) . ' — Admin — ' . config('app.business.name') : 'Admin — ' . config('app.business.name') ?></title>
     <meta name="csrf-token" content="<?= csrf_token() ?>">
     <link rel="icon" href="<?= asset('images/logo/favicon.png') ?>">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="<?= asset('css/fonts.css') ?>" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.5/sweetalert2.min.css" rel="stylesheet">
     <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
     <link href="<?= asset('css/admin.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/admin-enhancements.css') ?>" rel="stylesheet">
 </head>
 <body>
 <div class="dtc-page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Loading Daysitech Computers">
@@ -64,11 +65,16 @@
         <a href="/" class="nav-link"><i class="fa-solid fa-arrow-left"></i>Back to Store</a>
         <a href="/logout" class="nav-link"><i class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
     </aside>
+    <button type="button" class="admin-nav-backdrop" data-admin-nav-close aria-label="Close navigation"></button>
 
     <div class="admin-main">
         <div class="admin-topbar">
-            <h1><?= e($title ?? 'Admin') ?></h1>
+            <div class="admin-topbar-heading">
+                <button type="button" class="admin-menu-toggle" data-admin-nav-toggle aria-label="Open navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+                <h1><?= e($title ?? 'Admin') ?></h1>
+            </div>
             <div class="d-flex align-items-center gap-3">
+                <button type="button" class="admin-theme-toggle" data-admin-theme-toggle aria-label="Switch to dark theme" aria-pressed="false"><i class="fa-solid fa-moon" aria-hidden="true"></i></button>
                 <span class="text-muted-dtc small"><?= e(current_user()['name'] ?? '') ?> &middot; <span class="badge-pill badge-info"><?= e(ucfirst(user_role())) ?></span></span>
                 <i class="fa-solid fa-circle-user" style="font-size:1.5rem;color:#0B1F3A;"></i>
             </div>
@@ -82,6 +88,7 @@
                 <div class="dtc-alert dtc-alert-error" data-flash="error" data-message="<?= e($flashError) ?>" style="display:none"><i class="fa-solid fa-circle-exclamation"></i> <?= e($flashError) ?></div>
             <?php endif; ?>
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
             <?= $content ?? '' ?>
         </div>
     </div>
@@ -89,8 +96,25 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.10.5/sweetalert2.all.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+
 <script src="<?= asset('js/app.js') ?>"></script>
 <script src="<?= asset('js/admin.js') ?>"></script>
+<script>
+    (() => {
+        const url = new URL(window.location.href);
+        if (url.searchParams.get('admin_login') !== 'success') return;
+        try { localStorage.setItem('daysitech-admin-login-success', `${Date.now()}-${Math.random()}`); } catch (_) {}
+        if ('BroadcastChannel' in window) {
+            const channel = new BroadcastChannel('daysitech-admin-login');
+            channel.postMessage({ type: 'success' });
+            channel.close();
+        }
+        if (window.opener && !window.opener.closed) {
+            window.opener.postMessage({ type: 'daysitech-admin-login-success' }, window.location.origin);
+        }
+        url.searchParams.delete('admin_login');
+        window.history.replaceState({}, '', url.pathname + url.search + url.hash);
+    })();
+</script>
 </body>
 </html>

@@ -61,7 +61,7 @@ $title = 'Edit Product';
 ob_start();
 ?>
 
-<form action="/admin/products/edit/<?= e($id) ?>" method="POST">
+<form action="/admin/products/edit/<?= e($id) ?>" method="POST" data-product-editor data-unsaved-warning>
     <?= csrf_field() ?>
     <div class="row g-4">
         <div class="col-lg-8">
@@ -95,6 +95,7 @@ ob_start();
 
             <div class="admin-panel"><div class="admin-panel-body">
                 <h6 class="mb-3">Specifications</h6>
+                <div data-spec-rows>
                 <?php $specs = $product['specs'] ?? []; if (empty($specs)) $specs = ['' => '']; ?>
                 <?php foreach ($specs as $k => $v): ?>
                     <div class="row g-2 mb-2">

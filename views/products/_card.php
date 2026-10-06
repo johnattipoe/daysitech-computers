@@ -18,7 +18,15 @@ $img = $product['images'][0] ?? null;
             <?php elseif ((int) $product['stock'] <= LOW_STOCK_THRESHOLD): ?><span class="badge-pill badge-warning">Low Stock</span><?php endif; ?>
         </div>
     </a>
-    <button class="wishlist-btn" type="button" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+    <button class="wishlist-btn" type="button" aria-label="Save <?= e($product['name']) ?> to wishlist" aria-pressed="false"
+        data-wishlist-product
+        data-product-id="<?= e($product['id'] ?? '') ?>"
+        data-product-name="<?= e($product['name'] ?? '') ?>"
+        data-product-url="/products/<?= e($product['slug'] ?? $product['id'] ?? '') ?>"
+        data-product-image="<?= e($img ?? '') ?>"
+        data-product-price="<?= e((string) ($product['price'] ?? 0)) ?>"
+        data-product-price-label="<?= e(strip_tags(money($product['price'] ?? 0))) ?>"
+        data-product-in-stock="<?= $inStock ? 'true' : 'false' ?>"><i class="fa-regular fa-heart" aria-hidden="true"></i></button>
     <div class="product-body">
         <div class="product-category"><?= e($product['brand_name'] ?? 'Daysitech') ?></div>
         <a href="/products/<?= e($product['slug'] ?? $product['id']) ?>" class="product-name" style="text-decoration:none;"><?= e($product['name']) ?></a>
@@ -40,6 +48,7 @@ $img = $product['images'][0] ?? null;
                     <i class="fa-solid fa-cart-plus me-1"></i><?= $inStock ? 'Add to Cart' : 'Sold Out' ?>
                 </button>
             </form>
+            <button type="button" class="btn btn-outline-secondary product-compare-toggle" data-compare-product="<?= e($product['id'] ?? '') ?>" aria-pressed="false" aria-label="Compare <?= e($product['name'] ?? 'product') ?>"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i></button>
         </div>
     </div>
 </div>

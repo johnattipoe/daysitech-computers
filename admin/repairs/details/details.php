@@ -15,13 +15,14 @@ ob_start();
 ?>
 
 <a href="/admin/repairs" class="small text-muted-dtc mb-3 d-inline-block"><i class="fa-solid fa-arrow-left me-1"></i>Back to Repairs</a>
+<button type="button" class="admin-copy-button" data-copy-value="<?= e($repair['ticket_number']) ?>"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy ticket number</button>
 
 <div class="row g-4">
     <div class="col-lg-8">
         <div class="admin-panel"><div class="admin-panel-body">
             <h6 class="mb-3">Device & Issue</h6>
-            <div class="summary-line"><span>Device</span><span><?= e($repair['device_type']) ?> â€” <?= e($repair['brand']) ?> <?= e($repair['model']) ?></span></div>
-            <div class="summary-line"><span>Serial Number</span><span class="mono"><?= e($repair['serial_number'] ?: 'â€”') ?></span></div>
+            <div class="summary-line"><span>Device</span><span><?= e($repair['device_type']) ?> — <?= e($repair['brand']) ?> <?= e($repair['model']) ?></span></div>
+            <div class="summary-line"><span>Serial Number</span><span class="mono"><?= e($repair['serial_number'] ?: '—') ?></span></div>
             <div class="summary-line"><span>Service Requested</span><span><?= e($repair['service_type']) ?></span></div>
             <div class="summary-line"><span>Drop-off Date</span><span><?= format_date($repair['drop_off_date']) ?></span></div>
             <div class="mt-3">
@@ -41,7 +42,7 @@ ob_start();
     <div class="col-lg-4">
         <div class="admin-panel"><div class="admin-panel-body">
             <h6 class="mb-3">Update Ticket</h6>
-            <form action="/admin/repairs/<?= e($id) ?>/update" method="POST">
+            <form action="/admin/repairs/<?= e($id) ?>/update" method="POST" data-unsaved-warning>
                 <?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">Status</label>

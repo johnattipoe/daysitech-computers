@@ -97,13 +97,38 @@ session_set_cookie_params([
 ]);
 session_start();
 
-set_exception_handler(function (Throwable $e) {
+$render500Page = static function (): void {
+    $errorView = resolve_php_file(base_path('views/pages'), '500');
+    if (is_file($errorView)) {
+        require $errorView;
+        return;
+    }
+
+    echo '<!doctype html><html lang="en"><title>500 — Server Error</title><h1>500 — Something Went Wrong</h1></html>';
+};
+
+set_exception_handler(function (Throwable $e) use ($render500Page): void {
     log_message('error', $e->getMessage() . ' @ ' . $e->getFile() . ':' . $e->getLine());
     http_response_code(500);
+
     if (config('app.debug')) {
         echo '<pre style="background:#111;color:#f66;padding:1.5rem;">' . e($e->getMessage()) . "\n\n" . e($e->getTraceAsString()) . '</pre>';
-    } else {
-        require base_path('views/pages/500.php');
+        return;
+    }
+
+    $render500Page();
+});
+
+register_shutdown_function(static function () use ($render500Page): void {
+    $error = error_get_last();
+    $fatalTypes = [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR];
+
+    if (!$error || !in_array($error['type'], $fatalTypes, true)) return;
+
+    log_message('error', $error['message'] . ' @ ' . $error['file'] . ':' . $error['line']);
+    if (!config('app.debug')) {
+        if (!headers_sent()) http_response_code(500);
+        $render500Page();
     }
 });
 

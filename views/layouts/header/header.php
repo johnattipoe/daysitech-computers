@@ -8,9 +8,8 @@
     <meta name="csrf-token" content="<?= csrf_token() ?>">
     <link rel="icon" href="<?= asset('images/logo/favicon.png') ?>">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Self-hosted fonts -->
+    <link href="<?= asset('css/fonts.css') ?>" rel="stylesheet">
 
     <!-- Bootstrap 5 (layout grid, offcanvas, modal JS) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +23,8 @@
     <!-- App styles (compiled from /public/assets/scss) -->
     <link href="<?= asset('css/style.css') ?>" rel="stylesheet">
     <link href="<?= asset('css/responsive.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/storefront-enhancements.css') ?>" rel="stylesheet">
+    <link href="<?= asset('css/account-enhancements.css') ?>" rel="stylesheet">
 </head>
 <body>
 <div class="dtc-page-loader" id="pageLoader" role="status" aria-live="polite" aria-label="Loading Daysitech Computers">

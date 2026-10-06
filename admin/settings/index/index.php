@@ -39,7 +39,7 @@ ob_start();
 
 <div class="row justify-content-center">
     <div class="col-lg-7">
-        <form action="/admin/settings" method="POST" class="admin-panel">
+        <form action="/admin/settings" method="POST" class="admin-panel" data-unsaved-warning>
             <div class="admin-panel-body">
                 <h6 class="mb-3">Business Information</h6>
                 <div class="mb-3"><label class="form-label">Business Name</label><input type="text" name="name" class="form-control" value="<?= e($biz['name']) ?>" required></div>

@@ -90,7 +90,7 @@ class Router
         }
 
         http_response_code(404);
-        if (file_exists(base_path('views/pages/404.php'))) {
+        if (file_exists(resolve_php_file(base_path('views/pages'), '404'))) {
             view('pages.404', ['title' => 'Page Not Found']);
         } else {
             echo '404 Not Found';

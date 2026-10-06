@@ -19,16 +19,16 @@ $newArrivals = $newArrivals ?? [];
                 <a href="/repairs/book" class="btn btn-outline-light-line btn-lg"><i class="fa-solid fa-screwdriver-wrench me-2"></i>Book a Repair</a>
             </div>
             <div class="hero-stats">
-                <div class="hero-stat"><b>4,000+</b><span>Devices repaired</span></div>
-                <div class="hero-stat"><b>2,500+</b><span>Products sold</span></div>
-                <div class="hero-stat"><b>4.8/5</b><span>Average rating</span></div>
+                <div class="hero-stat"><b>Shop</b><span>Laptops &amp; accessories</span></div>
+                <div class="hero-stat"><b>Repair</b><span>Device diagnostics &amp; service</span></div>
+                <div class="hero-stat"><b>Support</b><span>Help from our team</span></div>
             </div>
         </div>
         <div class="hero-visual" data-aos="fade-up" data-aos-delay="100">
             <img src="<?= asset('images/banners/hero-device.png') ?>" alt="Laptop on workbench" style="width:100%;border-radius:12px;" onerror="this.style.display='none'">
             <div class="d-flex justify-content-between mt-3" style="font-family:'JetBrains Mono',monospace;color:rgba(255,255,255,.8);font-size:.8rem;">
-                <span><i class="fa-solid fa-circle-check" style="color:#2FBE85;"></i> Diagnostics running…</span>
-                <span>98% health</span>
+                <span><i class="fa-solid fa-circle-check" style="color:#2FBE85;"></i> Sales, repairs &amp; support</span>
+                <a href="/contact" class="text-reset">Talk to our team <i class="fa-solid fa-arrow-right ms-1"></i></a>
             </div>
         </div>
     </div>
@@ -69,6 +69,20 @@ $newArrivals = $newArrivals ?? [];
                     </a>
                 <?php endforeach; ?>
             <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<!-- SHOPPING SHORTCUTS -->
+<section class="section-sm bg-paper">
+    <div class="container-inner">
+        <div class="section-head">
+            <div><h2>Find a good place to start</h2><p>Explore current stock, compare prices, or browse top-rated products.</p></div>
+        </div>
+        <div class="row g-3">
+            <div class="col-md-4"><a class="home-shopping-shortcut" href="/products?in_stock=1"><i class="fa-solid fa-box-open"></i><span><strong>Available now</strong><small>Browse products currently in stock</small></span><i class="fa-solid fa-arrow-right ms-auto"></i></a></div>
+            <div class="col-md-4"><a class="home-shopping-shortcut" href="/products?sort=price_low"><i class="fa-solid fa-tags"></i><span><strong>Shop by price</strong><small>See lower-priced options first</small></span><i class="fa-solid fa-arrow-right ms-auto"></i></a></div>
+            <div class="col-md-4"><a class="home-shopping-shortcut" href="/products?sort=rating"><i class="fa-solid fa-star"></i><span><strong>Top rated</strong><small>Browse products with customer ratings</small></span><i class="fa-solid fa-arrow-right ms-auto"></i></a></div>
         </div>
     </div>
 </section>

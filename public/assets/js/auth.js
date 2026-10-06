@@ -6,6 +6,40 @@
   'use strict';
 
   document.addEventListener('DOMContentLoaded', function () {
+    const adminLoginForm = document.querySelector('form[data-admin-login]');
+    if (adminLoginForm) {
+      const returnToStore = () => window.location.replace('/');
+      adminLoginForm.addEventListener('submit', () => {
+        const tabName = 'daysitech-admin-panel';
+        const adminTab = window.open('', tabName);
+        if (adminTab) {
+          adminLoginForm.target = tabName;
+          try {
+            adminTab.document.title = 'Daysitech Admin';
+            adminTab.document.body.textContent = 'Signing in to the admin panel…';
+          } catch (_) {}
+        } else {
+          // Retain the native new-tab form target if script-created tabs are blocked.
+          adminLoginForm.target = '_blank';
+        }
+      });
+      window.addEventListener('message', (event) => {
+        if (event.origin !== window.location.origin || event.data?.type !== 'daysitech-admin-login-success') return;
+        returnToStore();
+      });
+      window.addEventListener('storage', (event) => {
+        if (event.key !== 'daysitech-admin-login-success' || !event.newValue) return;
+        try { localStorage.removeItem('daysitech-admin-login-success'); } catch (_) {}
+        returnToStore();
+      });
+      if ('BroadcastChannel' in window) {
+        const channel = new BroadcastChannel('daysitech-admin-login');
+        channel.addEventListener('message', (event) => {
+          if (event.data?.type === 'success') returnToStore();
+        });
+      }
+    }
+
     const pwd = document.querySelector('input[name="password"]');
     const confirm = document.querySelector('input[name="password_confirmation"]');
 
