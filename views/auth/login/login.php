@@ -10,7 +10,7 @@
             <h1><?= $adminLogin ? 'Admin Sign In' : 'Sign In' ?></h1>
             <p class="subtitle"><?= $adminLogin ? 'Enter your staff credentials to continue.' : 'Enter your details to access your account.' ?></p>
 
-            <form action="<?= $adminLogin ? '/admin/login' : '/login' ?>" method="POST">
+            <form action="<?= $adminLogin ? '/admin/login' : '/login' ?>" method="POST" <?= $adminLogin ? 'target="_blank"' : '' ?>>
                 <?= csrf_field() ?>
                 <div class="mb-3">
                     <label class="form-label">Email Address</label>
